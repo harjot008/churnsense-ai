@@ -149,6 +149,7 @@ payment_method = st.sidebar.selectbox(
 monthly_charges = st.sidebar.number_input(
     "Monthly charges",
     min_value=0.0,
+    max_value=150.0,
     value=20.0,
     step=0.1
 )
@@ -156,6 +157,7 @@ monthly_charges = st.sidebar.number_input(
 total_charges = st.sidebar.number_input(
     "Total charges",
     min_value=0.0,
+    max_value=10000.0,
     value=20.0,
     step=0.1
 )
