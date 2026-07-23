@@ -157,8 +157,6 @@ with st.sidebar.form("customer_form"):
     submitted = st.form_submit_button("Submit")
 
 if submitted:
-    st.toast("Details submitted ", duration="short", icon="😍")
-
     # Customer data to the dictionary
     customer_data = {
             "gender": gender,
@@ -190,5 +188,18 @@ if submitted:
         use_container_width=True
     )
 
+    st.toast("Details submitted ", duration="short", icon="😍")
+
     # Prediction part
-    predict_customer(customer_df)
+    prediction = predict_customer(customer_df)
+
+    # Prediction front end
+    st.subheader("Prediction result", divider="yellow")
+
+    if prediction == 1:
+        st.error("🚨 Churn alert! This customer might be ready to dip.")
+        st.write("Maybe hit them with a better offer before they ghost the company 👀")
+
+    else:
+        st.success("✅ We’re good! This customer looks likely to stay.")
+        st.write("No breakup vibes here. Customer loyalty is still alive 😌")
