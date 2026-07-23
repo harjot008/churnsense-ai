@@ -16,14 +16,6 @@ st.divider()
 # Current given data to predict
 st.subheader("Data given to predict", divider="yellow")
 
-# Dummy DataFrame
-pd = pd.DataFrame(
-    [["No", "Yes", "Male", 1]], columns=["IsMarried", "Parent", "Gender", "haveJob"]
-)
-
-# Show the dummy DataFrame
-st.dataframe(pd)
-
 # Sidebar for input values to predict
 st.sidebar.title("Input values")
 
@@ -165,3 +157,35 @@ with st.sidebar.form("customer_form"):
 
 if submitted:
     st.sidebar.write("Details submitted")
+
+# Customer data to the dictionary
+customer_data = {
+        "gender": gender,
+        "SeniorCitizen": senior_citizen,
+        "Partner": partner,
+        "Dependents": dependents,
+        "tenure": tenure,
+        "PhoneService": phone_service,
+        "MultipleLines": multiple_lines,
+        "InternetService": internet_service,
+        "OnlineSecurity": online_security,
+        "OnlineBackup": online_backup,
+        "DeviceProtection": device_protection,
+        "TechSupport": tech_support,
+        "StreamingTV": streaming_tv,
+        "StreamingMovies": streaming_movies,
+        "Contract": contract,
+        "PaperlessBilling": paperless_billing,
+        "PaymentMethod": payment_method,
+        "MonthlyCharges": monthly_charges,
+        "TotalCharges": total_charges
+}
+
+# Dataframe of the customer data to predict
+customer_df = pd.DataFrame([customer_data])
+
+st.dataframe(
+    customer_df,
+    use_container_width=True
+)
+
