@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from src.predict import predict_customer
 
 # Config the page
 st.set_page_config(
@@ -156,36 +157,38 @@ with st.sidebar.form("customer_form"):
     submitted = st.form_submit_button("Submit")
 
 if submitted:
-    st.sidebar.write("Details submitted")
+    st.toast("Details submitted ", duration="short", icon="😍")
 
-# Customer data to the dictionary
-customer_data = {
-        "gender": gender,
-        "SeniorCitizen": senior_citizen,
-        "Partner": partner,
-        "Dependents": dependents,
-        "tenure": tenure,
-        "PhoneService": phone_service,
-        "MultipleLines": multiple_lines,
-        "InternetService": internet_service,
-        "OnlineSecurity": online_security,
-        "OnlineBackup": online_backup,
-        "DeviceProtection": device_protection,
-        "TechSupport": tech_support,
-        "StreamingTV": streaming_tv,
-        "StreamingMovies": streaming_movies,
-        "Contract": contract,
-        "PaperlessBilling": paperless_billing,
-        "PaymentMethod": payment_method,
-        "MonthlyCharges": monthly_charges,
-        "TotalCharges": total_charges
-}
+    # Customer data to the dictionary
+    customer_data = {
+            "gender": gender,
+            "SeniorCitizen": senior_citizen,
+            "Partner": partner,
+            "Dependents": dependents,
+            "tenure": tenure,
+            "PhoneService": phone_service,
+            "MultipleLines": multiple_lines,
+            "InternetService": internet_service,
+            "OnlineSecurity": online_security,
+            "OnlineBackup": online_backup,
+            "DeviceProtection": device_protection,
+            "TechSupport": tech_support,
+            "StreamingTV": streaming_tv,
+            "StreamingMovies": streaming_movies,
+            "Contract": contract,
+            "PaperlessBilling": paperless_billing,
+            "PaymentMethod": payment_method,
+            "MonthlyCharges": monthly_charges,
+            "TotalCharges": total_charges
+    }
 
-# Dataframe of the customer data to predict
-customer_df = pd.DataFrame([customer_data])
+    # Dataframe of the customer data to predict
+    customer_df = pd.DataFrame([customer_data])
 
-st.dataframe(
-    customer_df,
-    use_container_width=True
-)
+    st.dataframe(
+        customer_df,
+        use_container_width=True
+    )
 
+    # Prediction part
+    predict_customer(customer_df)
